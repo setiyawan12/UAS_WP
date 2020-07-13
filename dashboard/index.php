@@ -1,10 +1,15 @@
 <?php
 include_once("../_header.php");
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+    $result = mysqli_query($con, "SELECT * FROM barang where nama like '%" . $search . "%'");
+} else {
+    $result = mysqli_query($con, "SELECT * FROM barang");
+}
 
-$result = mysqli_query($con, "SELECT * FROM barang");
 // if (!$result) {
 //     echo mysqli_error($con);
-// }
+// 
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -12,6 +17,13 @@ $result = mysqli_query($con, "SELECT * FROM barang");
         <h3>Selamat datang <?= $_SESSION['user']; ?> di panel Dashboard </h3>
         <div style="padding-bottom: 10px;">
             <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Hide</a>
+            <a href="./print_dashboard.php" target="_blank" class="btn btn-primary" id="menu-toggle">Print</a>
+            <div class="float-right">
+                <form action="index.php" method="get">
+                    <input type="text" name="search">
+                    <button class="btn btn-success btn-sm">Cari</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
