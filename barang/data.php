@@ -6,10 +6,10 @@ include 'action.php';
     <hr>
     <?php
     if (isset($_SESSION['response'])) { ?>
-    <div class="alert alert-<?= $_SESSION['res_type']; ?> alert-dismissable" text-center>
-        <button type="button" class="close" data_dismiss="alert">&times;</button>
-        <b><?= $_SESSION['response']; ?></b>
-    </div>
+        <div class="alert alert-<?= $_SESSION['res_type']; ?> alert-dismissable" text-center>
+            <button type="button" class="close" data_dismiss="alert">&times;</button>
+            <b><?= $_SESSION['response']; ?></b>
+        </div>
     <?php }
     unset($_SESSION['response']) ?>
 </div>
@@ -29,16 +29,13 @@ include 'action.php';
 
             <input type="hidden" name="id" value="<?= $id; ?>">
             <div class="form-group">
-                <input type="text" name="nama" value="<?= $nama; ?>" class="form-control" placeholder="Nama Barang"
-                    required>
+                <input type="text" name="nama" value="<?= $nama; ?>" class="form-control" placeholder="Nama Barang" required>
             </div>
             <div class="form-group">
-                <input type="text" name="keterangan" value="<?= $keterangan; ?>" class="form-control" placeholder="Keterangan"
-                    required>
+                <input type="text" name="keterangan" value="<?= $keterangan; ?>" class="form-control" placeholder="Keterangan" required>
             </div>
             <div class="form-group">
-                <input type="text" name="stock" value="<?= $stock; ?>" class="form-control" placeholder="Stock"
-                    required>
+                <input type="text" name="stock" value="<?= $stock; ?>" class="form-control" placeholder="Stock" required>
             </div>
             <div class="form-group">
                 <input type="hidden" name="oldimage" value="<?= $photo; ?>">
@@ -47,9 +44,9 @@ include 'action.php';
             </div>
             <div class="form-group">
                 <?php if ($update == true) { ?>
-                <input type="submit" name="update" class="btn btn-success btn-block" value="update Record">
+                    <input type="submit" name="update" class="btn btn-success btn-block" value="update Record">
                 <?php } else { ?>
-                <input type="submit" name="add" class="btn btn-primary btn-block" value="Add Record">
+                    <input type="submit" name="add" class="btn btn-primary btn-block" value="Add Record">
                 <?php } ?>
             </div>
         </form>
@@ -58,7 +55,7 @@ include 'action.php';
     <div class="col-md-8">
         <table class="table table-hover table-bordered">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">ID barang</th>
                     <th scope="col">Image</th>
                     <th scope="col">Nama Barang</th>
@@ -68,24 +65,23 @@ include 'action.php';
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                if(mysqli_num_rows($result) > 0){
-                while ($row = $result->fetch_assoc()) { ?>
-                <tr>
-                    <td><?= $row['id']; ?></td>
-                    <td><img src="<?php echo base_url()."/uas/".$row['photo'] ?>" width="25"></td>
-                    <td><?= $row['nama'] ?></td>
-                    <td><?= $row['keterangan'] ?></td>
-                    <td><?= $row['stock'] ?></td>
-                    <td>
-                        <a href="details.php?details=<?= $row['id']; ?>" class="badge badge-primary">Details</a>
-                        <a href="action.php?delete=<?= $row['id']; ?>" class="badge badge-danger"
-                            onclick="return confirm('apakah anda yakin menghapus');">Delete</a>
-                        <a href="data.php?edit=<?= $row['id']; ?>" class="badge badge-success">Edit</a>
-                    </td>
-                </tr>
-                <?php }
-                }else{?>
+                <?php
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <tr class="text-center">
+                            <td><?= $row['id']; ?></td>
+                            <td><img src="<?php echo base_url() . "/uas/" . $row['photo'] ?>" width="25"></td>
+                            <td><?= $row['nama'] ?></td>
+                            <td><?= $row['keterangan'] ?></td>
+                            <td><?= $row['stock'] ?></td>
+                            <td>
+                                <a href="details.php?details=<?= $row['id']; ?>" class="badge badge-primary">Details</a>
+                                <a href="action.php?delete=<?= $row['id']; ?>" class="badge badge-danger" onclick="return confirm('apakah anda yakin menghapus');">Delete</a>
+                                <a href="data.php?edit=<?= $row['id']; ?>" class="badge badge-success">Edit</a>
+                            </td>
+                        </tr>
+                    <?php }
+                } else { ?>
                     <tr>
                         <td colspan="6" style="text-align:center; color: red">Tidak ada data!</td>
                     </tr>

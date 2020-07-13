@@ -12,14 +12,17 @@ if (isset($_POST['add'])) {
     $nama = $_POST['nama'];
     $keterangan = $_POST['keterangan'];
     $stock = $_POST['stock'];
-    $photo = $_FILES['image']['name'];
-    $upload = "/gambar/" . $photo;
+    $name = $_FILES['image']['name'];
+    $photo = $_FILES['image']['tmp_name'];
+    $upload = "gambar/" . $name;
+
     // var_dump($upload);
     $query = "INSERT INTO barang (nama,keterangan,stock,photo)VALUES(?,?,?,?)";
     $stmt = $con->prepare($query);
     $stmt->bind_param("ssss", $nama, $keterangan, $stock, $upload);
     $stmt->execute();
-    move_uploaded_file($upload, $upload);
+    move_uploaded_file($photo, __DIR__ . '/../gambar/' . $name);
+
     header('location:data.php');
     $_SESSION['response'] = "sukses menambahkan";
     $_SESSION['res_type'] = "success";

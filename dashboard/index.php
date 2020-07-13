@@ -18,7 +18,7 @@ $result = mysqli_query($con, "SELECT * FROM barang");
 
 <table class="table">
     <thead class="table-striped table-dark">
-        <tr>
+        <tr class="text-center">
             <th>ID</th>
             <th>IMAGE</th>
             <th>Nama Barang</th>
@@ -28,12 +28,12 @@ $result = mysqli_query($con, "SELECT * FROM barang");
     </thead>
     <tbody>
         <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-            <tr class="table-info">
+            <tr class="table-info text-center">
                 <td>
                     <?= $row["id"]; ?>
                 </td>
                 <td>
-                    <img src="img/<?php echo $row["gambar"] ?>">
+                    <img src="<?php echo base_url() . "/uas/" . $row['photo'] ?>" width="30 ">
                 </td>
                 <td>
                     <?= $row["nama"]; ?>
